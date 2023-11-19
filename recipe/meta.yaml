@@ -11,6 +11,7 @@ source:
   sha256: 88fbcd2815083607a5d27962f323eae5752e3eb96511aaac98258f280cac0f8e
   patches:
     - 0001-pass-cmake-args.patch
+    - 0002-skip-python-for-crosscompiling.patch
 
 build:
   number: 2

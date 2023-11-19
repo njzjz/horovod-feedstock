@@ -1,0 +1,71 @@
+From a572739194d94996a713ab1ce5bf1f337e19917f Mon Sep 17 00:00:00 2001
+From: Jinzhe Zeng <jinzhe.zeng@rutgers.edu>
+Date: Sun, 19 Nov 2023 23:16:25 +0000
+Subject: [PATCH] skip python for crosscompiling
+
+---
+ cmake/Modules/FindPytorch.cmake    | 6 ++++++
+ cmake/Modules/FindTensorflow.cmake | 2 ++
+ 2 files changed, 8 insertions(+)
+
+diff --git a/cmake/Modules/FindPytorch.cmake b/cmake/Modules/FindPytorch.cmake
+index 05ed94e..e769d1b 100644
+--- a/cmake/Modules/FindPytorch.cmake
++++ b/cmake/Modules/FindPytorch.cmake
+@@ -14,14 +14,17 @@
+ # Compatible layer for CMake <3.12. Pytorch_ROOT will be accounted in for searching paths and libraries for CMake >=3.12.
+ list(APPEND CMAKE_PREFIX_PATH ${Pytorch_ROOT})
+ 
++if (NOT CMAKE_CROSSCOMPILING)
+ execute_process(COMMAND ${PY_EXE} -c "import torch; print(torch.__version__)"
+                 OUTPUT_VARIABLE Pytorch_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
++endif()
+ include(FindPackageHandleStandardArgs)
+ find_package_handle_standard_args(Pytorch REQUIRED_VARS Pytorch_VERSION VERSION_VAR Pytorch_VERSION)
+ if(NOT PYTORCH_FOUND)
+     return()
+ endif()
+ 
++if (NOT CMAKE_CROSSCOMPILING)
+ execute_process(COMMAND ${PY_EXE} -c "import torch; from torch.utils.cpp_extension import CUDA_HOME; print(True if ((torch.version.cuda is not None) and (CUDA_HOME is not None)) else False)"
+                 OUTPUT_VARIABLE Pytorch_CUDA OUTPUT_STRIP_TRAILING_WHITESPACE)
+ string(REGEX REPLACE "No (CUDA|ROCm) runtime[^\n]*\n?" "" Pytorch_CUDA "${Pytorch_CUDA}")
+@@ -51,6 +54,7 @@ execute_process(COMMAND ${PY_EXE} -c "import os,sys; sys.stdout=sys.stderr=open(
+                 OUTPUT_VARIABLE Pytorch_LIBRARY_DIRS OUTPUT_STRIP_TRAILING_WHITESPACE)
+ execute_process(COMMAND ${PY_EXE} -c "import os,sys; sys.stdout=sys.stderr=open(os.devnull,'w'); from torch.utils.cpp_extension import ${Pytorch_EXT} as ext; e = ext('', []); print(';'.join(e.libraries), file=sys.__stdout__)"
+                 OUTPUT_VARIABLE _Pytorch_LIBRARIES OUTPUT_STRIP_TRAILING_WHITESPACE)
++endif()
+ 
+ foreach(_LIB IN LISTS _Pytorch_LIBRARIES)
+     find_library(FOUND_LIB_${_LIB}
+@@ -59,9 +63,11 @@ foreach(_LIB IN LISTS _Pytorch_LIBRARIES)
+     list(APPEND Pytorch_LIBRARIES ${FOUND_LIB_${_LIB}})
+ endforeach()
+ 
++if (NOT CMAKE_CROSSCOMPILING)
+ execute_process(COMMAND ${PY_EXE} -c "import torch; print(torch.torch.compiled_with_cxx11_abi())"
+                 OUTPUT_VARIABLE Pytorch_CXX11 OUTPUT_STRIP_TRAILING_WHITESPACE)
+ string(TOUPPER ${Pytorch_CXX11} Pytorch_CXX11)
++endif()
+ if (Pytorch_CXX11)
+     set(Pytorch_COMPILE_FLAGS "${Pytorch_COMPILE_FLAGS} -D_GLIBCXX_USE_CXX11_ABI=1")
+ else()
+diff --git a/cmake/Modules/FindTensorflow.cmake b/cmake/Modules/FindTensorflow.cmake
+index 16d543b..9efd61b 100644
+--- a/cmake/Modules/FindTensorflow.cmake
++++ b/cmake/Modules/FindTensorflow.cmake
+@@ -11,9 +11,11 @@
+ # Compatible layer for CMake <3.12. Tensorflow_ROOT will be accounted in for searching paths and libraries for CMake >=3.12.
+ list(APPEND CMAKE_PREFIX_PATH ${Tensorflow_ROOT})
+ 
++if (NOT CMAKE_CROSSCOMPILING)
+ execute_process(COMMAND ${PY_EXE} -c "import tensorflow as tf; print(tf.__version__); print(tf.sysconfig.get_include()); print(' '.join(tf.sysconfig.get_link_flags())); print(' '.join(tf.sysconfig.get_compile_flags()))"
+                 OUTPUT_VARIABLE Tensorflow_OUTPUT OUTPUT_STRIP_TRAILING_WHITESPACE)
+ string(REGEX REPLACE "\n" ";" Tensorflow_OUTPUT "${Tensorflow_OUTPUT}")
++endif()
+ list(LENGTH Tensorflow_OUTPUT LEN)
+ if (LEN EQUAL "4")
+     list(GET Tensorflow_OUTPUT 0 Tensorflow_VERSION)
+-- 
+2.42.1
+
