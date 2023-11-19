@@ -11,7 +11,7 @@ source:
   sha256: 88fbcd2815083607a5d27962f323eae5752e3eb96511aaac98258f280cac0f8e
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   string: {{ proc_type }}_mpi_{{ mpi }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
   ignore_run_exports_from:
