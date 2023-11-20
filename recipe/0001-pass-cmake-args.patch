@@ -1,24 +1,34 @@
-From c09c1a08b33b51a35d255eb65ccedd44066e034c Mon Sep 17 00:00:00 2001
+From 3d0e7c0a7cb3c7960a62a90b1578233087d859f2 Mon Sep 17 00:00:00 2001
 From: Jinzhe Zeng <jinzhe.zeng@rutgers.edu>
-Date: Sun, 19 Nov 2023 16:18:06 -0500
+Date: Mon, 20 Nov 2023 02:00:48 +0000
 Subject: [PATCH] patch to pass CMAKE arguments
 
-Signed-off-by: Jinzhe Zeng <jinzhe.zeng@rutgers.edu>
 ---
- setup.py | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ setup.py | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/setup.py b/setup.py
-index b890286674..4884e3566a 100644
+index b890286..3ba28c7 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -111,7 +111,8 @@ def build_extensions(self):
+@@ -19,6 +19,7 @@ import atexit
+ import io
+ import os
+ import re
++import shlex
+ import shutil
+ import subprocess
+ import sys
+@@ -111,7 +112,8 @@ class custom_build_ext(build_ext):
          build_dir = self.get_ext_fullpath(ext_name).replace(self.get_ext_filename(ext_name), '')
          build_dir = os.path.abspath(build_dir)
  
 -        cmake_args = ['-DCMAKE_BUILD_TYPE=' + config,
-+        cmake_args = [os.environ["CMAKE_ARGS"],
++        cmake_args = [*shlex.split(os.environ["CMAKE_ARGS"]),
 +                      '-DCMAKE_BUILD_TYPE=' + config,
                        '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_{}={}'.format(config.upper(), build_dir),
                        '-DPYTHON_EXECUTABLE:FILEPATH=' + sys.executable]
  
+-- 
+2.42.1
+
