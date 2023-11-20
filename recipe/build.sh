@@ -29,7 +29,7 @@ if [[ "${target_platform}" == osx-arm64 ]]; then
     export CMAKE_ARGS="${CMAKE_ARGS} -D Pytorch_CUDA=OFF -DPytorch_ROCM=OFF"
     export CMAKE_ARGS="${CMAKE_ARGS} -D Pytorch_INCLUDE_DIRS=${SP_DIR}/torch/include;${SP_DIR}/torch/include/torch/csrc/api/include;${SP_DIR}/torch/include/TH;${SP_DIR}/torch/include/THC"
     export CMAKE_ARGS="${CMAKE_ARGS} -D Pytorch_LIBRARY_DIRS=${SP_DIR}/torch/lib"
-    export CMAKE_ARGS="${CMAKE_ARGS} -D Pytorch_LIBRARIES=c10;torch;torch_cpu;torch_python"
+    export CMAKE_ARGS="${CMAKE_ARGS} -D _Pytorch_LIBRARIES=c10;torch;torch_cpu;torch_python"
     export CMAKE_ARGS="${CMAKE_ARGS} -D Pytorch_CXX11=ON"
 fi
 
