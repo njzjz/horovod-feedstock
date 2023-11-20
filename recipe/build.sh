@@ -23,6 +23,15 @@ if [[ "${target_platform}" == osx-* ]]; then
     # https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
     export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 fi
+if [[ "${target_platform}" == osx-arm64 ]]; then
+    export CMAKE_ARGS="${CMAKE_ARGS} -D Tensorflow_OUTPUT=\"2.14.0;${SP_DIR}/tensorflow/include;-L${SP_DIR}/tensorflow -ltensorflow_framework.2;-I${SP_DIR}/tensorflow/include -DEIGEN_MAX_ALIGN_BYTES=64\""
+    export CMAKE_ARGS="${CMAKE_ARGS} -D Pytorch_VERSION=2.0.0"
+    export CMAKE_ARGS="${CMAKE_ARGS} -D Pytorch_CUDA=OFF -DPytorch_ROCM=OFF"
+    export CMAKE_ARGS="${CMAKE_ARGS} -D Pytorch_INCLUDE_DIRS=${SP_DIR}/torch/include;${SP_DIR}/torch/include/torch/csrc/api/include;${SP_DIR}/torch/include/TH;${SP_DIR}/torch/include/THC"
+    export CMAKE_ARGS="${CMAKE_ARGS} -D Pytorch_LIBRARY_DIRS=${SP_DIR}/torch/lib"
+    export CMAKE_ARGS="${CMAKE_ARGS} -D _Pytorch_LIBRARIES=c10;torch;torch_cpu;torch_python"
+    export CMAKE_ARGS="${CMAKE_ARGS} -D Pytorch_CXX11=ON"
+fi
 
 # default is -j8
 export MAKEFLAGS="-j${CPU_COUNT}"

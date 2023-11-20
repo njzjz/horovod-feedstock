@@ -9,9 +9,12 @@ package:
 source:
   url: https://github.com/horovod/horovod/archive/refs/tags/v{{ version }}.tar.gz
   sha256: 88fbcd2815083607a5d27962f323eae5752e3eb96511aaac98258f280cac0f8e
+  patches:
+    - 0001-pass-cmake-args.patch
+    - 0002-skip-python-for-crosscompiling.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   string: {{ proc_type }}_mpi_{{ mpi }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
   ignore_run_exports_from:
@@ -43,6 +46,7 @@ requirements:
     - python  # [build_platform != target_platform]
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
     - flatbuffers
+    - {{ mpi }}  # [build_platform != target_platform and mpi == "openmpi"]
   host:
     - python
     - pip
