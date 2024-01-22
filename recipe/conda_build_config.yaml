@@ -1,11 +1,6 @@
 mpi:
   - mpich
   - openmpi
-# https://github.com/conda-forge/tensorflow-feedstock/pull/367#issuecomment-1890751416
-tensorflow:  # [cuda_compiler_version == '11.8']
-  - '2.14'   # [cuda_compiler_version == '11.8']
-pytorch:     # [cuda_compiler_version == '11.8']
-  - '2.0'    # [cuda_compiler_version == '11.8']
 # abseil now only support MacOS >=10.13, see
 # https://github.com/abseil/abseil-cpp#support and
 # https://github.com/abseil/abseil-cpp/issues/1513

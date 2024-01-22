@@ -12,6 +12,7 @@ source:
   patches:
     - 0001-pass-cmake-args.patch
     - 0002-skip-python-for-crosscompiling.patch
+    - 3998.patch
 
 build:
   number: 3
@@ -59,15 +60,17 @@ requirements:
     - nccl  # [cuda_compiler_version != 'None']
     - {{ mpi }}
     - mpi4py
-    - tensorflow
+    - tensorflow  # [not (cuda_compiler_version or "").startswith("11")]
     - tensorflow * {{ proc_type }}*
-    - pytorch
+    - pytorch  # [not (cuda_compiler_version or "").startswith("11")]
     - pytorch * {{ proc_type }}*
+    # https://github.com/conda-forge/tensorflow-feedstock/pull/367#issuecomment-1890751416
+    - tensorflow 2.14.*  # [(cuda_compiler_version or "").startswith("11")]
+    - pytorch 2.0.*  # [(cuda_compiler_version or "").startswith("11")]
     # for flatc
     - flatbuffers
     - libboost-headers
     - lbfgspp
-    - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
     - cuda-cudart-dev  # [(cuda_compiler_version or "").startswith("12")]
     - cuda-nvtx-dev    # [(cuda_compiler_version or "").startswith("12")]
 
