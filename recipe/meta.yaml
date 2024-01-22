@@ -23,7 +23,6 @@ build:
     - flatbuffers
     - tensorflow
     - pytorch
-    - libtorch
   # Horovod supports multiple frameworks, and the package is built against TensorFlow and PyTorch.
   # However, usually, the user only uses one of them simultaneously. (by importing either horovod.tensorflow or horovod.torch)
   # Thus, TensorFlow and PyTorch are not listed in the `run` section, but in the `run_constrained` section.
@@ -39,6 +38,8 @@ build:
     - "*/libtensorflow_cc.*.dylib"  # [osx]
     - "*/_pywrap_tensorflow_internal.so"
     - "*/torch/lib/*.dylib"  # [osx]
+    - "*/libc10.so"  # [linux]
+    - "*/libtorch*.so"  # [linux]
 
 requirements:
   build:
