@@ -17,7 +17,7 @@ docker_image:
 flatbuffers:
 - 23.5.26
 mpi:
-- mpich
+- openmpi
 mpich:
 - '4'
 nccl:
@@ -29,11 +29,13 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.11.* *_cpython
+- 3.8.* *_cpython
 pytorch:
-- '2.0'
+- '2.1'
 target_platform:
 - linux-64
+tensorflow:
+- '2.15'
 zip_keys:
 - - cxx_compiler_version
   - cuda_compiler

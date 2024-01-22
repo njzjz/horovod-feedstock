@@ -7,13 +7,13 @@ channel_targets:
 cuda_compiler:
 - nvcc
 cuda_compiler_version:
-- '11.8'
+- '11.2'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '11'
+- '10'
 docker_image:
-- quay.io/condaforge/linux-anvil-cuda:11.8
+- quay.io/condaforge/linux-anvil-cuda:11.2
 flatbuffers:
 - 23.5.26
 mpi:
@@ -29,11 +29,13 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.9.* *_cpython
+- 3.8.* *_cpython
 pytorch:
-- '2.0'
+- '2.1'
 target_platform:
 - linux-64
+tensorflow:
+- '2.15'
 zip_keys:
 - - cxx_compiler_version
   - cuda_compiler
