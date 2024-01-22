@@ -34,6 +34,7 @@ build:
     - "*/libtensorflow_framework.so.*"  # [linux]
     - "*/libtensorflow_cc.so.*"  # [linux]
     - "*/torch/lib/*.so"  # [linux]
+    - "*/torch/*.so"  # [linux]
     - "*/libtensorflow_framework.*.dylib"  # [osx]
     - "*/libtensorflow_cc.*.dylib"  # [osx]
     - "*/_pywrap_tensorflow_internal.so"
