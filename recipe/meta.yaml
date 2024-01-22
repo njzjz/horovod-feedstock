@@ -17,6 +17,7 @@ source:
 build:
   number: 3
   skip: true  # [win]
+  skip: true  # [py<39]
   string: {{ proc_type }}_mpi_{{ mpi }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
   ignore_run_exports_from:
     - flatbuffers
