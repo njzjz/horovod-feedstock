@@ -38,7 +38,7 @@ build:
     - "*/libtensorflow_cc.*.dylib"  # [osx]
     - "*/_pywrap_tensorflow_internal.so"
     - "*/torch/lib/*.dylib"  # [osx]
-    - "*/libc10.so"  # [linux]
+    - "*/libc10*.so"  # [linux]
     - "*/libtorch*.so"  # [linux]
 
 requirements:
