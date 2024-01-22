@@ -10,6 +10,7 @@ if [[ ${cuda_compiler_version} != "None" ]]; then
     export HOROVOD_GPU_OPERATIONS=NCCL
     export HOROVOD_NCCL_LINK=SHARED
     export HOROVOD_CUDA_HOME=/usr/local/cuda
+    export CMAKE_ARGS="${CMAKE_ARGS} -D CMAKE_CUDA_ARCHITECTURES=all"
 fi
 export HOROVOD_WITH_TENSORFLOW=1
 export HOROVOD_WITH_PYTORCH=1
