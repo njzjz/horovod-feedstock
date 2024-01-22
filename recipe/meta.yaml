@@ -14,7 +14,7 @@ source:
     - 0002-skip-python-for-crosscompiling.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
   string: {{ proc_type }}_mpi_{{ mpi }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
   ignore_run_exports_from:
@@ -67,6 +67,9 @@ requirements:
     - flatbuffers
     - libboost-headers
     - lbfgspp
+    - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
+    - cuda-cudart-dev  # [(cuda_compiler_version or "").startswith("12")]
+    - cuda-nvtx-dev    # [(cuda_compiler_version or "").startswith("12")]
 
   run:
     - python
