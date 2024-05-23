@@ -71,6 +71,7 @@ requirements:
     # https://github.com/conda-forge/tensorflow-feedstock/pull/367#issuecomment-1890751416
     - tensorflow 2.14.*  # [(cuda_compiler_version or "").startswith("11")]
     - pytorch 2.0.*  # [(cuda_compiler_version or "").startswith("11")]
+    - flatbuffers 23.5.26  # [(cuda_compiler_version or "").startswith("11")]
     # for flatc
     - flatbuffers
     - libboost-headers
