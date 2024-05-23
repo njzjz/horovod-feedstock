@@ -17,7 +17,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '16'
 flatbuffers:
-- 24.3.6
+- 24.3.25
 macos_machine:
 - arm64-apple-darwin20.0.0
 mpi:
@@ -37,4 +37,4 @@ pytorch:
 target_platform:
 - osx-arm64
 tensorflow:
-- '2.15'
+- '2.16'
