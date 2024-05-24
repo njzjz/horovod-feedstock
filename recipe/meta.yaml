@@ -78,6 +78,7 @@ requirements:
     - lbfgspp
     - cuda-cudart-dev  # [(cuda_compiler_version or "").startswith("12")]
     - cuda-nvtx-dev    # [(cuda_compiler_version or "").startswith("12")]
+    - cffi >=1.4.0
 
   run:
     - python
@@ -88,6 +89,7 @@ requirements:
     - nccl  # [cuda_compiler_version != 'None']
     - {{ mpi }}
     - mpi4py
+    - cffi >=1.4.0
 
   run_constrained:
     - {{ pin_compatible('tensorflow', max_pin='x.x') }} {{ proc_type }}*
