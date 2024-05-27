@@ -1,5 +1,11 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '11.0'
+MACOSX_SDK_VERSION:
+- '11.0'
+c_stdlib:
+- macosx_deployment_target
+c_stdlib_version:
+- '11.0'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -11,7 +17,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '16'
 flatbuffers:
-- 23.5.26
+- 24.3.25
 macos_machine:
 - arm64-apple-darwin20.0.0
 mpi:
@@ -27,8 +33,8 @@ pin_run_as_build:
 python:
 - 3.11.* *_cpython
 pytorch:
-- '2.1'
+- '2.3'
 target_platform:
 - osx-arm64
 tensorflow:
-- '2.15'
+- '2.16'
