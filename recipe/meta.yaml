@@ -74,6 +74,8 @@ requirements:
     - tensorflow 2.14.*  # [(cuda_compiler_version or "").startswith("11")]
     - pytorch 2.0.*  # [(cuda_compiler_version or "").startswith("11")]
     - flatbuffers 23.5.26  # [(cuda_compiler_version or "").startswith("11")]
+    # pytorch 2.0 uses pkg_resources.packaging, removed in setuptools 70
+    - setuptools <70  # [(cuda_compiler_version or "").startswith("11")]
     # for flatc
     - flatbuffers  # [not (cuda_compiler_version or "").startswith("11")]
     - libboost-headers
