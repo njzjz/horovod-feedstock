@@ -50,7 +50,8 @@ requirements:
     - make  # [unix]
     - python  # [build_platform != target_platform]
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-    - flatbuffers
+    - flatbuffers 23.5.26  # [(cuda_compiler_version or "").startswith("11")]
+    - flatbuffers  # [not (cuda_compiler_version or "").startswith("11")]
     - {{ mpi }}  # [build_platform != target_platform and mpi == "openmpi"]
   host:
     - python
@@ -64,6 +65,7 @@ requirements:
     - nccl  # [cuda_compiler_version != 'None']
     - {{ mpi }}
     - mpi4py
+    - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
     - tensorflow  # [not (cuda_compiler_version or "").startswith("11")]
     - tensorflow * {{ proc_type }}*
     - pytorch  # [not (cuda_compiler_version or "").startswith("11")]
@@ -73,7 +75,7 @@ requirements:
     - pytorch 2.0.*  # [(cuda_compiler_version or "").startswith("11")]
     - flatbuffers 23.5.26  # [(cuda_compiler_version or "").startswith("11")]
     # for flatc
-    - flatbuffers
+    - flatbuffers  # [not (cuda_compiler_version or "").startswith("11")]
     - libboost-headers
     - lbfgspp
     - cuda-cudart-dev  # [(cuda_compiler_version or "").startswith("12")]
