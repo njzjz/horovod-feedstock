@@ -12,6 +12,7 @@ source:
   patches:
     - 0001-pass-cmake-args.patch
     - 0002-skip-python-for-crosscompiling.patch
+    - 3957.patch
     - 3998.patch
 
 build:
