@@ -42,6 +42,8 @@ build:
     - "*/torch/lib/*.dylib"  # [osx]
     - "*/libc10*.so"  # [linux]
     - "*/libtorch*.so"  # [linux]
+    - "*/libc10*.dylib"  # [osx]
+    - "*/libtorch*.dylib"  # [osx]
 
 requirements:
   build:
