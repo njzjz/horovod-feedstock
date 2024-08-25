@@ -39,6 +39,11 @@ build:
     - "*/libtensorflow_framework.*.dylib"  # [osx]
     - "*/libtensorflow_cc.*.dylib"  # [osx]
     - "*/_pywrap_tensorflow_internal.so"
+    - "*/torch/lib/*.dylib"  # [osx]
+    - "*/libc10*.so"  # [linux]
+    - "*/libtorch*.so"  # [linux]
+    - "*/libc10*.dylib"  # [osx]
+    - "*/libtorch*.dylib"  # [osx]
 
 requirements:
   build:
@@ -69,7 +74,6 @@ requirements:
     - tensorflow * {{ proc_type }}*
     - pytorch  # [not (cuda_compiler_version or "").startswith("11")]
     - pytorch * {{ proc_type }}*
-    - libtorch  # [not (cuda_compiler_version or "").startswith("11")]
     # https://github.com/conda-forge/tensorflow-feedstock/pull/367#issuecomment-1890751416
     - tensorflow 2.14.*  # [(cuda_compiler_version or "").startswith("11")]
     - pytorch 2.0.*  # [(cuda_compiler_version or "").startswith("11")]
