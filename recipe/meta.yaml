@@ -12,10 +12,11 @@ source:
   patches:
     - 0001-pass-cmake-args.patch
     - 0002-skip-python-for-crosscompiling.patch
+    - 3957.patch
     - 3998.patch
 
 build:
-  number: 5
+  number: 6
   skip: true  # [win]
   skip: true  # [py<39]
   skip: ture  # [py>=312 and cuda_compiler_version in ("11.2", "11.8")]
@@ -41,6 +42,8 @@ build:
     - "*/torch/lib/*.dylib"  # [osx]
     - "*/libc10*.so"  # [linux]
     - "*/libtorch*.so"  # [linux]
+    - "*/libc10*.dylib"  # [osx]
+    - "*/libtorch*.dylib"  # [osx]
 
 requirements:
   build:
@@ -104,18 +107,14 @@ test:
   requires:
     - pip
     - tensorflow
-    - pytorch 
-    # Fix ModuleNotFoundError: No module named 'keras._tf_keras'
-    - tf-keras {{ tensorflow }}  # [not (cuda_compiler_version or "").startswith("11")]
+    - pytorch
   imports:
     - horovod
-    # Need to set TF_USE_LEGACY_KERAS=1 until keras 3.3 can be used
-    # - horovod.tensorflow
+    - horovod.tensorflow
     - horovod.torch
   commands:
     - pip check
     - horovodrun -h
-    - TF_USE_LEGACY_KERAS=1 python -c "import horovod.tensorflow"
 
 about:
   home: https://horovod.ai/

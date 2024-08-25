@@ -1,0 +1,35 @@
+From ff4ca09d3996ca51de47c4021519e12876847120 Mon Sep 17 00:00:00 2001
+From: Thomas Bouvier <contact@thomas-bouvier.io>
+Date: Mon, 11 Sep 2023 19:29:50 +0200
+Subject: [PATCH] Fix build on gcc 13: add missing headers (#3957)
+
+Signed-off-by: Thomas Bouvier <contact@thomas-bouvier.io>
+---
+ horovod/common/common.h      | 1 +
+ horovod/common/group_table.h | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/horovod/common/common.h b/horovod/common/common.h
+index 9ac5987eab..c56d119f29 100644
+--- a/horovod/common/common.h
++++ b/horovod/common/common.h
+@@ -20,6 +20,7 @@
+ 
+ #include <functional>
+ #include <memory>
++#include <stdexcept>
+ #include <string>
+ #include <unordered_map>
+ #include <unordered_set>
+diff --git a/horovod/common/group_table.h b/horovod/common/group_table.h
+index c49bfa8b5f..f48008d037 100644
+--- a/horovod/common/group_table.h
++++ b/horovod/common/group_table.h
+@@ -15,6 +15,7 @@
+ 
+ #include <mutex>
+ #include <queue>
++#include <string>
+ #include <unordered_map>
+ #include <vector>
+ 
