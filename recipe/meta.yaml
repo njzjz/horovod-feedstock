@@ -107,18 +107,14 @@ test:
   requires:
     - pip
     - tensorflow
-    - pytorch 
-    # Fix ModuleNotFoundError: No module named 'keras._tf_keras'
-    - tf-keras {{ tensorflow }}  # [not (cuda_compiler_version or "").startswith("11")]
+    - pytorch
   imports:
     - horovod
-    # Need to set TF_USE_LEGACY_KERAS=1 until keras 3.3 can be used
-    # - horovod.tensorflow
+    - horovod.tensorflow
     - horovod.torch
   commands:
     - pip check
     - horovodrun -h
-    - TF_USE_LEGACY_KERAS=1 python -c "import horovod.tensorflow"
 
 about:
   home: https://horovod.ai/
