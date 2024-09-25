@@ -8,3 +8,9 @@ MACOSX_SDK_VERSION:        # [osx and x86_64]
   - "10.13"                # [osx and x86_64]
 c_stdlib_version:          # [osx and x86_64]
   - "10.13"                # [osx and x86_64]
+# workaround for https://github.com/conda-forge/abseil-cpp-feedstock/issues/79
+# note: horovod is good but there are issues with other applications
+pytorch:
+- '2.1'
+tensorflow:
+- '2.15'
