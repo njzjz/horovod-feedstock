@@ -54,8 +54,7 @@ requirements:
     - make  # [unix]
     - python  # [build_platform != target_platform]
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-    - flatbuffers 23.5.26  # [(cuda_compiler_version or "").startswith("11")]
-    - flatbuffers  # [not (cuda_compiler_version or "").startswith("11")]
+    - flatbuffers 23.5.26
     - {{ mpi }}  # [build_platform != target_platform and mpi == "openmpi"]
   host:
     - python
