@@ -20,6 +20,7 @@ build:
   skip: true  # [win]
   skip: true  # [py<39]
   skip: ture  # [py>=312 and cuda_compiler_version in ("11.2", "11.8")]
+  skip: true  # [py>=312]
   string: {{ proc_type }}_mpi_{{ mpi }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
   ignore_run_exports_from:
     - flatbuffers
