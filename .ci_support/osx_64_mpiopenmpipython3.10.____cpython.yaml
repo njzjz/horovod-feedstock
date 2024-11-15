@@ -10,12 +10,14 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+cuda_compiler:
+- None
 cuda_compiler_version:
 - None
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '17'
+- '18'
 flatbuffers:
 - 24.3.25
 libboost_headers:
@@ -39,4 +41,4 @@ pytorch:
 target_platform:
 - osx-64
 tensorflow:
-- '2.16'
+- '2.17'
