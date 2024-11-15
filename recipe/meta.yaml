@@ -16,7 +16,7 @@ source:
     - 3998.patch
 
 build:
-  number: 7
+  number: 8
   skip: true  # [win]
   skip: true  # [py<39]
   skip: ture  # [py>=312 and cuda_compiler_version in ("11.2", "11.8")]
